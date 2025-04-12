@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Formulas Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #e74c3c;
+    --background-color: #f8f9fa;
+    --text-color: #2c3e50;
+    --card-background: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+header {
+    background: linear-gradient(135deg, var(--primary-color), #34495e);
+    color: white;
+    padding: 1.5rem 0;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #3498db, #2ecc71);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient 3s ease infinite;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.search-container {
+    position: relative;
+    width: 300px;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 0.8rem 1.2rem;
+    padding-right: 2.5rem;
+    border: none;
+    border-radius: 25px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.search-container input:focus {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.search-container input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.search-container i {
+    position: absolute;
+    right: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.categories {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.category-btn {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 25px;
+    background-color: var(--card-background);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+.category-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.category-btn.active {
+    background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+    color: white;
+    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+}
+
+.formulas-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.formula-card {
+    background-color: var(--card-background);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.5s ease forwards;
+    opacity: 0;
+}
+
+.formula-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.formula-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px var(--shadow-color);
+}
+
+.formula-card:hover::before {
+    transform: scaleX(1);
+}
+
+.formula-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.formula-card p {
+    margin-bottom: 1rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+.formula {
+    background-color: var(--background-color);
+    padding: 1.2rem;
+    border-radius: 10px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.3rem;
+    text-align: center;
+    margin: 1rem 0;
+    box-shadow: inset 0 2px 4px var(--shadow-color);
+    transition: all 0.3s ease;
+}
+
+.formula:hover {
+    background-color: #e9ecef;
+    transform: scale(1.02);
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary-color), #34495e);
+    color: white;
+    margin-top: 2rem;
+    position: relative;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .search-container {
+        width: 100%;
+    }
+    
+    .categories {
+        justify-content: center;
+    }
+    
+    .formulas-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Add smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Add loading animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Add delay to each card */
+.formula-card:nth-child(1) { animation-delay: 0.1s; }
+.formula-card:nth-child(2) { animation-delay: 0.2s; }
+.formula-card:nth-child(3) { animation-delay: 0.3s; }
+.formula-card:nth-child(4) { animation-delay: 0.4s; }
+.formula-card:nth-child(5) { animation-delay: 0.5s; } 
+</style>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Physics Formulas Hub</div>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search formulas...">
+                <i class="fas fa-search"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="categories">
+            <button class="category-btn active" data-category="all">All Formulas</button>
+            <button class="category-btn" data-category="mechanics">Mechanics</button>
+            <button class="category-btn" data-category="thermodynamics">Thermodynamics</button>
+            <button class="category-btn" data-category="electromagnetism">Electromagnetism</button>
+            <button class="category-btn" data-category="optics">Optics</button>
+            <button class="category-btn" data-category="modern">Modern Physics</button>
+        </div>
+
+        <div class="formulas-container" id="formulasContainer">
+            <!-- Formulas will be dynamically inserted here -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Physics Formulas Hub. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Physics formulas data
+const formulas = [
+    // Mechanics formulas
+    {
+        category: 'mechanics',
+        name: 'Newton\'s Second Law',
+        description: 'The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass.',
+        formula: 'F = ma'
+    },
+    {
+        category: 'mechanics',
+        name: 'Kinetic Energy',
+        description: 'The energy possessed by an object due to its motion.',
+        formula: 'KE = ½mv²'
+    },
+    {
+        category: 'mechanics',
+        name: 'Potential Energy',
+        description: 'The energy stored in an object due to its position or configuration.',
+        formula: 'PE = mgh'
+    },
+    {
+        category: 'mechanics',
+        name: 'Momentum',
+        description: 'The product of an object\'s mass and velocity.',
+        formula: 'p = mv'
+    },
+    {
+        category: 'mechanics',
+        name: 'Centripetal Force',
+        description: 'The force that keeps an object moving in a circular path.',
+        formula: 'F = mv²/r'
+    },
+    {
+        category: 'mechanics',
+        name: 'Torque',
+        description: 'The rotational equivalent of force.',
+        formula: 'τ = rFsinθ'
+    },
+    {
+        category: 'mechanics',
+        name: 'Work-Energy Theorem',
+        description: 'The work done on an object equals its change in kinetic energy.',
+        formula: 'W = ΔKE'
+    },
+    {
+        category: 'mechanics',
+        name: 'Hooke\'s Law',
+        description: 'The force needed to extend or compress a spring by some distance.',
+        formula: 'F = -kx'
+    },
+
+    // Thermodynamics formulas
+    {
+        category: 'thermodynamics',
+        name: 'First Law of Thermodynamics',
+        description: 'The change in internal energy of a system is equal to the heat added to the system minus the work done by the system.',
+        formula: 'ΔU = Q - W'
+    },
+    {
+        category: 'thermodynamics',
+        name: 'Ideal Gas Law',
+        description: 'The relationship between pressure, volume, temperature, and number of moles of a gas.',
+        formula: 'PV = nRT'
+    },
+    {
+        category: 'thermodynamics',
+        name: 'Efficiency of Heat Engine',
+        description: 'The ratio of work output to heat input in a heat engine.',
+        formula: 'η = 1 - Qc/Qh'
+    },
+    {
+        category: 'thermodynamics',
+        name: 'Entropy Change',
+        description: 'The change in entropy of a system during a reversible process.',
+        formula: 'ΔS = Q/T'
+    },
+    {
+        category: 'thermodynamics',
+        name: 'Heat Transfer',
+        description: 'The amount of heat transferred through conduction.',
+        formula: 'Q = kA(ΔT/L)'
+    },
+
+    // Electromagnetism formulas
+    {
+        category: 'electromagnetism',
+        name: 'Ohm\'s Law',
+        description: 'The current through a conductor between two points is directly proportional to the voltage across the two points.',
+        formula: 'V = IR'
+    },
+    {
+        category: 'electromagnetism',
+        name: 'Coulomb\'s Law',
+        description: 'The force between two point charges is directly proportional to the product of their charges and inversely proportional to the square of the distance between them.',
+        formula: 'F = k(q₁q₂)/r²'
+    },
+    {
+        category: 'electromagnetism',
+        name: 'Electric Field',
+        description: 'The force per unit charge experienced by a test charge.',
+        formula: 'E = F/q'
+    },
+    {
+        category: 'electromagnetism',
+        name: 'Magnetic Force',
+        description: 'The force experienced by a moving charge in a magnetic field.',
+        formula: 'F = qvBsinθ'
+    },
+    {
+        category: 'electromagnetism',
+        name: 'Faraday\'s Law',
+        description: 'The induced electromotive force in any closed circuit is equal to the negative of the time rate of change of the magnetic flux.',
+        formula: 'ε = -dΦ/dt'
+    },
+    {
+        category: 'electromagnetism',
+        name: 'Ampere\'s Law',
+        description: 'The magnetic field around a current-carrying conductor.',
+        formula: '∮B·dl = μ₀I'
+    },
+
+    // Optics formulas
+    {
+        category: 'optics',
+        name: 'Snell\'s Law',
+        description: 'The relationship between the angles of incidence and refraction when light passes through different media.',
+        formula: 'n₁sinθ₁ = n₂sinθ₂'
+    },
+    {
+        category: 'optics',
+        name: 'Lens Formula',
+        description: 'The relationship between the object distance, image distance, and focal length of a lens.',
+        formula: '1/f = 1/v + 1/u'
+    },
+    {
+        category: 'optics',
+        name: 'Magnification',
+        description: 'The ratio of image height to object height.',
+        formula: 'M = -v/u'
+    },
+    {
+        category: 'optics',
+        name: 'Thin Film Interference',
+        description: 'The condition for constructive interference in thin films.',
+        formula: '2nt = (m + ½)λ'
+    },
+    {
+        category: 'optics',
+        name: 'Diffraction Grating',
+        description: 'The condition for constructive interference in a diffraction grating.',
+        formula: 'd sinθ = mλ'
+    },
+
+    // Modern Physics formulas
+    {
+        category: 'modern',
+        name: 'Einstein\'s Mass-Energy Equivalence',
+        description: 'Energy and mass are interchangeable.',
+        formula: 'E = mc²'
+    },
+    {
+        category: 'modern',
+        name: 'Planck\'s Equation',
+        description: 'The energy of a photon is proportional to its frequency.',
+        formula: 'E = hf'
+    },
+    {
+        category: 'modern',
+        name: 'De Broglie Wavelength',
+        description: 'The wavelength associated with a moving particle.',
+        formula: 'λ = h/p'
+    },
+    {
+        category: 'modern',
+        name: 'Heisenberg Uncertainty Principle',
+        description: 'The fundamental limit to the precision with which certain pairs of physical properties can be known.',
+        formula: 'ΔxΔp ≥ h/4π'
+    },
+    {
+        category: 'modern',
+        name: 'Schrödinger Equation',
+        description: 'The fundamental equation of quantum mechanics.',
+        formula: 'iħ∂ψ/∂t = Hψ'
+    },
+    {
+        category: 'modern',
+        name: 'Relativistic Energy',
+        description: 'The total energy of a particle moving at relativistic speeds.',
+        formula: 'E = γmc²'
+    }
+];
+
+// DOM Elements
+const formulasContainer = document.getElementById('formulasContainer');
+const searchInput = document.getElementById('searchInput');
+const categoryButtons = document.querySelectorAll('.category-btn');
+
+// Display formulas
+function displayFormulas(filteredFormulas = formulas) {
+    formulasContainer.innerHTML = '';
+    
+    filteredFormulas.forEach(formula => {
+        const formulaCard = document.createElement('div');
+        formulaCard.className = 'formula-card';
+        formulaCard.innerHTML = `
+            <h3>${formula.name}</h3>
+            <p>${formula.description}</p>
+            <div class="formula">${formula.formula}</div>
+        `;
+        formulasContainer.appendChild(formulaCard);
+    });
+}
+
+// Filter formulas by category
+function filterByCategory(category) {
+    if (category === 'all') {
+        displayFormulas();
+    } else {
+        const filteredFormulas = formulas.filter(formula => formula.category === category);
+        displayFormulas(filteredFormulas);
+    }
+}
+
+// Search functionality
+function searchFormulas(searchTerm) {
+    const filteredFormulas = formulas.filter(formula => 
+        formula.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        formula.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        formula.formula.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    displayFormulas(filteredFormulas);
+}
+
+// Event Listeners
+categoryButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        categoryButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        filterByCategory(button.dataset.category);
+    });
+});
+
+searchInput.addEventListener('input', (e) => {
+    searchFormulas(e.target.value);
+});
+
+// Initial display
+displayFormulas(); 
+    </script>
+</body>
+</html> 
